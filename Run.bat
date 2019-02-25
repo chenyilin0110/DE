@@ -1,6 +1,6 @@
 set Ud=32.768
 set population=1000
-set dim=1000
+set dim=100
 set F=0.3
 set CR=0.1
 set iteration=400
