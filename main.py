@@ -5,6 +5,7 @@ from Mutation import mutation
 from Crossover import crossover
 from Selection import selection
 from Fitness import fitness
+import time
 
 Ud = sys.argv[1]
 population = sys.argv[2]
@@ -14,7 +15,7 @@ CR = sys.argv[5]
 iteration = sys.argv[6]
 
 Ld = float(Ud) * (-1)
-
+start = time.time()
 # Initial 
 populationDataOriginal = np.zeros((int(population), int(dim)))
 for eachpopulationData_colum in range(int(population)):
@@ -41,3 +42,5 @@ for eachiteration in range(int(iteration)):
 	# reset
 	populationDataOriginal = selectionData.copy()
 	populationData = selectionData.copy()
+end = time.time()
+print(end-start)
