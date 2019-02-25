@@ -4,7 +4,7 @@ import sys
 from Mutation import mutation
 from Crossover import crossover
 from Selection import selection
-
+from Fitness import fitness
 Ud = sys.argv[1]
 population = sys.argv[2]
 dim = sys.argv[3]
@@ -21,8 +21,8 @@ for eachpopulationData_colum in range(int(population)):
         r = rand.random()
         populationDataOriginal[eachpopulationData_colum][eachpopulationData_row] = ((float(Ud) - Ld) * r) + Ld
 populationData = populationDataOriginal.copy() # copy populationDataOriginal to populationData
-
-for i in range(int(iteration)):
+best = 99999
+for eachiteration in range(int(iteration)):
 	# Mutation
 	mutationData = mutation(populationData, float(F))
 
@@ -31,7 +31,12 @@ for i in range(int(iteration)):
 
 	# Selection
 	selectionData = selection(populationDataOriginal, crossoverData, int(dim))			
-	
+	count = []
+	for i in range(np.size(selectionData, 0)):
+		count.append(fitness(selectionData[i][:], int(dim)))
+		if count[i] < best:
+			best = count[i]
+	print(eachiteration, best)
 	# reset
 	populationDataOriginal = selectionData.copy()
 	populationData = selectionData.copy()
